@@ -930,9 +930,7 @@ async def item_info_callback_handler(call: CallbackQuery):
     item_info_list = get_item_info(item_name, user_id)
     category = item_info_list['category_name']
     lang = get_user_language(user_id) or 'en'
-    purchases = select_user_items(user_id)
-    _, discount, _ = get_level_info(purchases, lang)
-    price = round(item_info_list["price"] * (100 - discount) / 100, 2)
+    price = item_info_list["price"]
     markup = item_info(item_name, category, lang)
     caption = (
         f'🏪 Item {display_name(item_name)}\n'
@@ -1017,14 +1015,7 @@ async def confirm_buy_callback_handler(call: CallbackQuery):
         await call.answer('❌ Item not found', show_alert=True)
         return
     lang = get_user_language(user_id) or 'en'
-    purchases = select_user_items(user_id)
-    _, discount, _ = get_level_info(purchases, lang)
-    user = check_user(user_id)
-    price = round(info['price'] * (100 - discount) / 100, 2)
-    if user and user.streak_discount:
-        price = round(price * 0.75, 2)
-
-    lang = get_user_language(user_id) or 'en'
+    price = info['price']
     TgConfig.STATE[user_id] = None
     TgConfig.STATE.pop(f'{user_id}_promo_applied', None)
     TgConfig.STATE[f'{user_id}_pending_item'] = item_name
@@ -1133,11 +1124,11 @@ async def buy_item_callback_handler(call: CallbackQuery):
                 )
             purchases = purchases_before + 1
             level_before, _, _ = get_level_info(purchases_before, lang)
-            level_after, discount, _ = get_level_info(purchases, lang)
+            level_after, _, _ = get_level_info(purchases, lang)
             if level_after != level_before:
                 await bot.send_message(
                     user_id,
-                    t(lang, 'level_up', level=level_after, discount=discount),
+                    t(lang, 'level_up', level=level_after),
                 )
 
             username = (
