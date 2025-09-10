@@ -29,7 +29,12 @@ LEVEL_NAMES = {
 
 
 def get_level_info(purchases: int, lang: str = 'lt'):
-    """Return level name, discount and progress battery for purchase count."""
+    """Return level name and progress battery for purchase count.
+
+    Discount levels have been disabled, so this function always returns 0 as the
+    discount value to maintain compatibility with callers expecting three
+    return values.
+    """
     if purchases < 0:
         purchases = 0
     level_index = 0
@@ -40,7 +45,7 @@ def get_level_info(purchases: int, lang: str = 'lt'):
             break
     names = LEVEL_NAMES.get(lang, LEVEL_NAMES['lt'])
     level_name = names[level_index]
-    discount = level_index * 2
+    discount = 0
 
     if level_index < len(LEVEL_THRESHOLDS) - 1:
         next_threshold = LEVEL_THRESHOLDS[level_index + 1]
