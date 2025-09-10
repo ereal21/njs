@@ -150,7 +150,7 @@ LANGUAGES = {
         'achievement_unlocked': '🏆 Achievement unlocked: {name}',
         'show_unlocked': 'Show Unlocked',
         'show_locked': 'Show Locked',
-        'level_up': '🎉 Congratulations! You reached {level} and received a {discount}% discount for future purchases.',
+        'level_up': '🎉 Congratulations! You reached {level}.',
 
 
 
@@ -305,7 +305,7 @@ LANGUAGES = {
         'achievement_unlocked': '🏆 Достижение получено: {name}',
         'show_unlocked': 'Показать полученные',
         'show_locked': 'Показать неполученные',
-        'level_up': '🎉 Поздравляем! Вы достигли уровня {level} и получили скидку {discount}% на будущие покупки.',
+        'level_up': '🎉 Поздравляем! Вы достигли уровня {level}.',
 
     },
     'lt': {
@@ -458,7 +458,7 @@ LANGUAGES = {
         'achievement_unlocked': '🏆 Pasiekimas atrakintas: {name}',
         'show_unlocked': 'Rodyti pasiektus',
         'show_locked': 'Rodyti nepasiektus',
-        'level_up': '🎉 Sveikiname! Pasiekėte {level} ir gavote {discount}% nuolaidą būsimiems pirkiniams.',
+        'level_up': '🎉 Sveikiname! Pasiekėte {level}.',
 
 
         'achievement_unlocked': '🏆 Pasiekimas atrakintas: {name}',
