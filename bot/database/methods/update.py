@@ -1,4 +1,3 @@
-import datetime
 
 from bot.database.models import (
     User,
@@ -108,29 +107,5 @@ def clear_stock_notifications(item_name: str) -> None:
 
 
 def process_purchase_streak(telegram_id: int) -> None:
-    """Update streak data after a successful purchase."""
-    session = Database().session
-    user = session.query(User).filter(User.telegram_id == telegram_id).one()
-    today = datetime.date.today()
-
-    if user.streak_discount:
-        user.streak_discount = False
-        user.purchase_streak = 0
-
-    if user.last_purchase_date:
-        last_date = datetime.date.fromisoformat(user.last_purchase_date)
-        diff = (today - last_date).days
-        if diff == 1:
-            user.purchase_streak += 1
-        elif diff > 1:
-            user.purchase_streak = 1
-    else:
-        user.purchase_streak = 1
-
-    user.last_purchase_date = today.isoformat()
-
-    if user.purchase_streak >= 3:
-        user.purchase_streak = 0
-        user.streak_discount = True
-
-    session.commit()
+    """Purchase streak discounts are disabled."""
+    return

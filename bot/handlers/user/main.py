@@ -1015,6 +1015,7 @@ async def confirm_buy_callback_handler(call: CallbackQuery):
         await call.answer('❌ Item not found', show_alert=True)
         return
     lang = get_user_language(user_id) or 'en'
+    price = info['price']
     user = check_user(user_id)
     price = info['price']
     if user and user.streak_discount:
