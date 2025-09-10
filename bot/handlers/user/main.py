@@ -1016,6 +1016,12 @@ async def confirm_buy_callback_handler(call: CallbackQuery):
         return
     lang = get_user_language(user_id) or 'en'
     price = info['price']
+    user = check_user(user_id)
+    price = info['price']
+    if user and user.streak_discount:
+        price = round(price * 0.75, 2)
+
+    lang = get_user_language(user_id) or 'en'
     TgConfig.STATE[user_id] = None
     TgConfig.STATE.pop(f'{user_id}_promo_applied', None)
     TgConfig.STATE[f'{user_id}_pending_item'] = item_name
